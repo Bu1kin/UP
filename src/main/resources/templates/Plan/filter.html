@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск планов поставок</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <div th:insert="fragments/header :: headerMain"></div>
+</head>
+<body>
+    <div style="margin-left: 15px; margin-top: 15px; margin-bottom: 20px">
+        <div th:each="el : ${plan}">
+            <p th:text="'ID: ' + ${el.id}"></p>
+            <p th:text="'Дата оформления: ' + ${el.dateOfRegistration}"></p>
+
+            <div th:each="el1 : ${el.getProduct()}">
+                <p th:text="'Товар: ' + ${el1.getNameProduct()} + ', количество: ' + ${el1.getAmount()} + ', цена товара (за шт.): ' + ${el1.getPrice()}">
+            </div>
+            <div th:each="el1 : ${el.getSupplier()}">
+                <p th:text="'Поставщик: ' + ${el1.getNameSupplier()}"/>
+            </div>
+            <div th:each="el1 : ${el.getEmployee()}">
+                <p th:text="'Сотрудник: ' + ${el1.getSurname()} + ' ' + ${el1.getName()} + ' ' + ${el1.getMiddleName()}"/>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a href="/plan" style="margin-left: 15px; margin-bottom: 30px" class="btn btn-dark">Назад</a>
+    </div>
+</body>
+</html>

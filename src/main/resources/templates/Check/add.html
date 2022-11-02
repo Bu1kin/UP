@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление чека</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <div th:insert="fragments/header :: headerMain"></div>
+</head>
+<body>
+    <form th:object="${check}" method="post" style="margin-left: 15px; margin-top: 15px">
+        <input required pattern="[0-3][0-9][-][0-1][0-9][-][1-2][0-9][0-9][0-9]" type="text" name="dateOfRelease" placeholder="Дата печати ДД-ММ-ГГГГ" style="margin-bottom: 8px"> <br>
+
+        <div style="margin-bottom: 8px"> Номер заказа:
+            <select required name="order">
+                <div th:each="el : ${orderArrayList}">
+                    <option th:text="${el.id}"></option>
+                </div>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 8px"> Сотрудник:
+            <select required name="employee">
+                <div th:each="el : ${listEmployee}">
+                    <option th:text="${el.id} + ' ' + ${el.surname}"></option>
+                </div>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 8px"> Клиент:
+            <select required name="client">
+                <div th:each="el : ${listClient}">
+                    <option th:text="${el.id} + ' ' + ${el.surname}"></option>
+                </div>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 8px"> Смена:
+            <select required name="shift">
+                <div th:each="el : ${listShift}">
+                    <option th:text="${el.nameShift}"></option>
+                </div>
+            </select>
+        </div>
+
+        <input type="submit" class="btn btn-success" value="Создать" style="margin-bottom: 10px"> <br>
+    </form>
+    <a href="/plan" class="btn btn-dark" style="margin-left: 15px">Назад</a>
+</body>
+</html>
